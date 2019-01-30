@@ -1,5 +1,8 @@
 // Generated from Calculator.g4 by ANTLR 4.7.2
- import java.util.HashMap; 
+ 
+    import java.util.HashMap; 
+    import java.lang.Math;
+
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -64,13 +67,13 @@ public class CalculatorBaseListener implements CalculatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEquation(CalculatorParser.EquationContext ctx) { }
+	@Override public void enterOperation(CalculatorParser.OperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEquation(CalculatorParser.EquationContext ctx) { }
+	@Override public void exitOperation(CalculatorParser.OperationContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

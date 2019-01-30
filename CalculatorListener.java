@@ -1,5 +1,8 @@
 // Generated from Calculator.g4 by ANTLR 4.7.2
- import java.util.HashMap; 
+ 
+    import java.util.HashMap; 
+    import java.lang.Math;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -48,13 +51,13 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitShorthand(CalculatorParser.ShorthandContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#equation}.
+	 * Enter a parse tree produced by {@link CalculatorParser#operation}.
 	 * @param ctx the parse tree
 	 */
-	void enterEquation(CalculatorParser.EquationContext ctx);
+	void enterOperation(CalculatorParser.OperationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#equation}.
+	 * Exit a parse tree produced by {@link CalculatorParser#operation}.
 	 * @param ctx the parse tree
 	 */
-	void exitEquation(CalculatorParser.EquationContext ctx);
+	void exitOperation(CalculatorParser.OperationContext ctx);
 }

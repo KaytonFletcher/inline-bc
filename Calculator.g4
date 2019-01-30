@@ -1,10 +1,9 @@
 grammar Calculator;
 
-// exprList: topExpr ( ';' topExpr)* ';'? ; 
-
-// varDef: VAR ID '=' expr;
-
-@header{ import java.util.HashMap; }
+@header{ 
+    import java.util.HashMap; 
+    import java.lang.Math;
+}
 
 @members{ 
     HashMap<String, Integer> hmap = new HashMap<String, Integer>();
@@ -18,31 +17,39 @@ line:
     expr { System.out.println("result: "+ Integer.toString($expr.i));} 
     | shorthand
     | ID '=' er=expr { hmap.put($ID.text, $er.i ); } 
-    | ID operation '=' 
     | COMMENT { System.out.println($COMMENT.text);} 
     | NEWLINE
     ;
 
 expr returns [int i]: 
-    el=expr op='*' er=expr { $i=$el.i*$er.i; }
-    | el=expr op='/' er=expr { $i=$el.i/$er.i; }
-    | el=expr op='+' er=expr { $i=$el.i+$er.i; }
-    | el=expr op='-' er=expr { $i=$el.i-$er.i; }
+    '(' expr ')' 
+    | el=expr op=POW er=expr { $i= (int)Math.pow($el.i,$er.i);}
+    | el=expr op=(MULT|DIV) er=expr 
+    { if($op.text.equals("*")){$i=$el.i*$er.i;} else {$i=$el.i/$er.i;} }
+
+    | el=expr op=(PLUS|MINUS) er=expr
+    { if($op.text.equals("+")){$i=$el.i+$er.i;} else {$i=$el.i-$er.i;} }
+
     | INT { $i=Integer.parseInt($INT.text); }
     | ID { $i=hmap.getOrDefault($ID.text, 0);}
-    | '('e=expr')' 
     ;
 
-muldiv:
 
-;
+// addsub:
+//     addsub PLUS muldiv
+//     | addsub MINUS muldiv
+//     | muldiv
+// ;
 
-addsub:
+// muldiv: 
+//     muldiv MULT power
+//     | muldiv DIV power
+//     | power
+// ;
 
-
-;
-
-
+// power:
+//     POW
+// ;
 
 
 shorthand returns [int i]:
@@ -52,7 +59,6 @@ shorthand returns [int i]:
     | op='--' ID { hmap.put($ID.text, hmap.getOrDefault($ID.text,0) - 1); $i=hmap.getOrDefault($ID.text,0);}
 ;
 
-
 operation [int i]:
     '+'
     | '-'
@@ -60,6 +66,12 @@ operation [int i]:
     | '*'
     | '^'
     ;
+
+PLUS: '+';
+MINUS: '-';
+MULT: '*';
+DIV: '/';
+POW: '^';
 
 NEWLINE:'\r'? '\n' ;
 COMMENT: '/*' .*? '*/';
