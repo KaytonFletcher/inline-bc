@@ -14,8 +14,8 @@ program: line+ ;
 // { System.out.println("Value: "+ $expr.i); hmap.put($ID.text, $expr.i); }
 
 line: 
-    expr { System.out.println("result: "+ Integer.toString($expr.i));} 
-    | shorthand
+    expr { System.out.println("result: "+ Integer.toString($expr.i)); } 
+    | shorthand { System.out.println("result: "+ Integer.toString($shorthand.i)); } 
     | ID '=' er=expr { hmap.put($ID.text, $er.i ); } 
     | COMMENT { System.out.println($COMMENT.text);} 
     | NEWLINE
@@ -34,24 +34,6 @@ expr returns [int i]:
     | ID { $i=hmap.getOrDefault($ID.text, 0);}
     ;
 
-
-// addsub:
-//     addsub PLUS muldiv
-//     | addsub MINUS muldiv
-//     | muldiv
-// ;
-
-// muldiv: 
-//     muldiv MULT power
-//     | muldiv DIV power
-//     | power
-// ;
-
-// power:
-//     POW
-// ;
-
-
 shorthand returns [int i]:
     ID op='++' { hmap.put($ID.text, hmap.getOrDefault($ID.text,0) + 1); $i=hmap.getOrDefault($ID.text,0)-1;}
     | op='++' ID { hmap.put($ID.text, hmap.getOrDefault($ID.text,0) + 1); $i=hmap.getOrDefault($ID.text,0);}
@@ -65,7 +47,7 @@ operation [int i]:
     | '/'
     | '*'
     | '^'
-    ;
+;
 
 PLUS: '+';
 MINUS: '-';

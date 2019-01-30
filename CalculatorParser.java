@@ -246,7 +246,6 @@ public class CalculatorParser extends Parser {
 	public static class ExprContext extends ParserRuleContext {
 		public int i;
 		public ExprContext el;
-		public ExprContext e;
 		public Token INT;
 		public Token ID;
 		public Token op;
@@ -302,7 +301,7 @@ public class CalculatorParser extends Parser {
 				setState(30);
 				match(T__1);
 				setState(31);
-				((ExprContext)_localctx).e = expr(0);
+				expr(0);
 				setState(32);
 				match(T__2);
 				}
