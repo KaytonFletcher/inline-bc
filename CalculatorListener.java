@@ -51,13 +51,13 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitShorthand(CalculatorParser.ShorthandContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#operation}.
+	 * Enter a parse tree produced by {@link CalculatorParser#equation}.
 	 * @param ctx the parse tree
 	 */
-	void enterOperation(CalculatorParser.OperationContext ctx);
+	void enterEquation(CalculatorParser.EquationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#operation}.
+	 * Exit a parse tree produced by {@link CalculatorParser#equation}.
 	 * @param ctx the parse tree
 	 */
-	void exitOperation(CalculatorParser.OperationContext ctx);
+	void exitEquation(CalculatorParser.EquationContext ctx);
 }
