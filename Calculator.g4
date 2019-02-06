@@ -11,17 +11,18 @@ grammar Calculator;
     Scanner scnr = new Scanner(System.in);
 }
 
-program: line ( ';' '\n' line)* ';'? ;
+program: (line';'?)+;
 
 line: 
     expr { if(!Double.isNaN($expr.val)){System.out.println("result: "+ Double.toString($expr.val));} } 
     | shorthand { System.out.println("result: "+ Double.toString($shorthand.val)); } 
     | equation  
     | PRINT print { System.out.println(); }
-    | shorthand (expr | equation | shorthand) { System.out.println("Parsing Error"); }
-    | (COMMENT | INLINE_COMMENT)
+    //| shorthand (expr | equation | shorthand) { System.out.println("Parsing Error"); }
+    | COMMENT
+    | INLINE_COMMENT
     | NEWLINE
-    ;
+;
 
 expr returns [Double val]: 
      MINUS expr { $val = $expr.val * -1; }
@@ -101,7 +102,7 @@ READ: 'read()';
 
 NEWLINE:'\r'? '\n';
 COMMENT: '/*' .*? '*/';
-INLINE_COMMENT: '#' ~[\r\n]*;
+INLINE_COMMENT: '#' .*? '\n';
 ID: [_A-Za-z]+;
 //INT: [0-9]+ ;
 DOUBLE: ([0-9]*[.])?[0-9]+;
