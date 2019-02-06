@@ -11,7 +11,7 @@ grammar Calculator;
     Scanner scnr = new Scanner(System.in);
 }
 
-program: line+ ;
+program: line ( ';' '\n' line)* ';'? ;
 
 // { System.out.println("Value: "+ $expr.val); hmap.put($ID.text, $expr.val); }
 
@@ -60,6 +60,7 @@ expr returns [Double val]:
     | EXP expr ')' { $val = Math.exp($expr.val); }
     
 
+    | READ { $val = scnr.nextDouble(); }
     ;
 
 shorthand returns [Double val]:
