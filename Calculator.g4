@@ -13,17 +13,14 @@ grammar Calculator;
 
 program: line ( ';' '\n' line)* ';'? ;
 
-// { System.out.println("Value: "+ $expr.val); hmap.put($ID.text, $expr.val); }
-
 line: 
     expr { if(!Double.isNaN($expr.val)){System.out.println("result: "+ Double.toString($expr.val));} } 
     | shorthand { System.out.println("result: "+ Double.toString($shorthand.val)); } 
     | equation  
-    | NEWLINE
-    //| ZERO_ERROR {System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}
-    //| NEGATIVE_SQRT {System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number");}
     | PRINT print { System.out.println(); }
     | shorthand (expr | equation | shorthand) { System.out.println("Parsing Error"); }
+    | (COMMENT | INLINE_COMMENT)
+    | NEWLINE
     ;
 
 expr returns [Double val]: 
@@ -102,9 +99,9 @@ EXP: 'e(';
 READ: 'read()';
 
 
-NEWLINE:'\r'? '\n' ;
-COMMENT: '/*' .*? '*/' -> skip;
-INLINE_COMMENT: '#' ~[\r\n]* ->skip;
+NEWLINE:'\r'? '\n';
+COMMENT: '/*' .*? '*/';
+INLINE_COMMENT: '#' ~[\r\n]*;
 ID: [_A-Za-z]+;
 //INT: [0-9]+ ;
 DOUBLE: ([0-9]*[.])?[0-9]+;

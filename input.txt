@@ -1,3 +1,4 @@
-print "hello"
-read();
-5+6;
+2+14
+
+#hello
+
