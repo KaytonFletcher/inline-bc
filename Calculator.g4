@@ -20,6 +20,8 @@ line:
     | NEWLINE
     | ZERO_ERROR {System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}
     | NEGATIVE_SQRT {System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number");}
+    | shorthand (expr | equation | shorthand)x
+    // | { System.out.println("Parsing Error"); }
     ;
 
 expr returns [Double val]: 
