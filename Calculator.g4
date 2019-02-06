@@ -3,10 +3,12 @@ grammar Calculator;
 @header{ 
     import java.util.HashMap; 
     import java.lang.Math;
+    import java.util.Scanner;
 }
 
 @members{ 
     HashMap<String, Double> hmap = new HashMap<String, Double>();
+    Scanner scnr = new Scanner(System.in);
 }
 
 program: line+ ;
@@ -55,6 +57,7 @@ expr returns [Double val]:
     | COS expr ')' { $val = Math.cos($expr.val); }
     | LOG expr ')' { $val = Math.log($expr.val); } 
     | EXP expr ')' { $val = Math.exp($expr.val); }
+
     ;
 
 shorthand returns [Double val]:
@@ -71,6 +74,7 @@ equation returns [Double val]:
     | ID '*=' expr { hmap.put($ID.text, hmap.getOrDefault($ID.text,0.0) * $expr.val); }
     | ID '/=' expr { hmap.put($ID.text, hmap.getOrDefault($ID.text,0.0) / $expr.val); }
     | ID '^=' expr { hmap.put($ID.text, Math.pow(hmap.getOrDefault($ID.text,0.0), $expr.val)); }
+    | ID '=' READ  { double toAdd = scnr.nextDouble(); hmap.put($ID.text, toAdd); }
 ;
 
 
@@ -87,10 +91,11 @@ SIN: 's(';
 COS: 'c(';
 LOG: 'l(';
 EXP: 'e(';
+READ: 'read()';
 
 NEWLINE:'\r'? '\n' ;
 COMMENT: '/*' .*? '*/' -> skip;
-INLINE_COMMENT: '#' ~[\r\n]* -> skip;
+INLINE_COMMENT: '#' ~[\r\n]* ->skip;
 ID: [_A-Za-z]+;
 //INT: [0-9]+ ;
 DOUBLE: ([0-9]*[.])?[0-9]+;

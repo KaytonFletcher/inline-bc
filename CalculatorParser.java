@@ -2,6 +2,7 @@
  
     import java.util.HashMap; 
     import java.lang.Math;
+    import java.util.Scanner;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -22,8 +23,8 @@ public class CalculatorParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, PLUS=11, MINUS=12, MULT=13, DIV=14, POW=15, NOT=16, AND=17, OR=18, 
-		SQRT=19, SIN=20, COS=21, LOG=22, EXP=23, NEWLINE=24, COMMENT=25, INLINE_COMMENT=26, 
-		ID=27, DOUBLE=28, WS=29, ZERO_ERROR=30, NEGATIVE_SQRT=31;
+		SQRT=19, SIN=20, COS=21, LOG=22, EXP=23, READ=24, NEWLINE=25, COMMENT=26, 
+		INLINE_COMMENT=27, ID=28, DOUBLE=29, WS=30, ZERO_ERROR=31, NEGATIVE_SQRT=32;
 	public static final int
 		RULE_program = 0, RULE_line = 1, RULE_expr = 2, RULE_shorthand = 3, RULE_equation = 4;
 	private static String[] makeRuleNames() {
@@ -37,7 +38,7 @@ public class CalculatorParser extends Parser {
 		return new String[] {
 			null, "'('", "')'", "'++'", "'--'", "'='", "'+='", "'-='", "'*='", "'/='", 
 			"'^='", "'+'", "'-'", "'*'", "'/'", "'^'", "'!'", "'&&'", "'||'", "'sqrt('", 
-			"'s('", "'c('", "'l('", "'e('"
+			"'s('", "'c('", "'l('", "'e('", "'read()'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -45,7 +46,7 @@ public class CalculatorParser extends Parser {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, "PLUS", 
 			"MINUS", "MULT", "DIV", "POW", "NOT", "AND", "OR", "SQRT", "SIN", "COS", 
-			"LOG", "EXP", "NEWLINE", "COMMENT", "INLINE_COMMENT", "ID", "DOUBLE", 
+			"LOG", "EXP", "READ", "NEWLINE", "COMMENT", "INLINE_COMMENT", "ID", "DOUBLE", 
 			"WS", "ZERO_ERROR", "NEGATIVE_SQRT"
 		};
 	}
@@ -97,6 +98,7 @@ public class CalculatorParser extends Parser {
 
 	 
 	    HashMap<String, Double> hmap = new HashMap<String, Double>();
+	    Scanner scnr = new Scanner(System.in);
 
 	public CalculatorParser(TokenStream input) {
 		super(input);
@@ -647,6 +649,7 @@ public class CalculatorParser extends Parser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
+		public TerminalNode READ() { return getToken(CalculatorParser.READ, 0); }
 		public EquationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -665,7 +668,11 @@ public class CalculatorParser extends Parser {
 		EquationContext _localctx = new EquationContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_equation);
 		try {
+<<<<<<< HEAD
 			setState(152);
+=======
+			setState(160);
+>>>>>>> 3777583922190ec05cb27c99fac2e052aad39483
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
@@ -740,6 +747,18 @@ public class CalculatorParser extends Parser {
 				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), Math.pow(hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0), ((EquationContext)_localctx).expr.val)); 
 				}
 				break;
+			case 7:
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(156);
+				((EquationContext)_localctx).ID = match(ID);
+				setState(157);
+				match(T__4);
+				setState(158);
+				match(READ);
+				 double toAdd = scnr.nextDouble(); hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), toAdd); 
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -777,11 +796,16 @@ public class CalculatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
+<<<<<<< HEAD
 		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!\u009d\4\2\t\2\4"+
+=======
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\"\u00a5\4\2\t\2\4"+
+>>>>>>> 3777583922190ec05cb27c99fac2e052aad39483
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\6\2\16\n\2\r\2\16\2\17\3\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\36\n\3\3\3\3\3\5\3\"\n\3\3\4"+
 		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
 		"\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
+<<<<<<< HEAD
 		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4O\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
 		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7"+
 		"\4j\n\4\f\4\16\4m\13\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5"+
@@ -821,6 +845,48 @@ public class CalculatorParser extends Parser {
 		"\6\4\2\u0098\u0099\b\6\1\2\u0099\u009b\3\2\2\2\u009a|\3\2\2\2\u009a\u0081"+
 		"\3\2\2\2\u009a\u0086\3\2\2\2\u009a\u008b\3\2\2\2\u009a\u0090\3\2\2\2\u009a"+
 		"\u0095\3\2\2\2\u009b\13\3\2\2\2\n\17\35!Nikz\u009a";
+=======
+		"\3\4\3\4\3\4\7\4n\n\4\f\4\16\4q\13\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
+		"\5\3\5\3\5\3\5\5\5\177\n\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\3\6\5\6\u00a3\n\6\3\6\2\3\6\7\2\4\6\b\n\2\4\3\2\17"+
+		"\20\3\2\r\16\2\u00bf\2\r\3\2\2\2\4%\3\2\2\2\6R\3\2\2\2\b~\3\2\2\2\n\u00a2"+
+		"\3\2\2\2\f\16\5\4\3\2\r\f\3\2\2\2\16\17\3\2\2\2\17\r\3\2\2\2\17\20\3\2"+
+		"\2\2\20\3\3\2\2\2\21\22\5\6\4\2\22\23\b\3\1\2\23&\3\2\2\2\24\25\5\b\5"+
+		"\2\25\26\b\3\1\2\26&\3\2\2\2\27&\5\n\6\2\30&\7\33\2\2\31\32\7!\2\2\32"+
+		"&\b\3\1\2\33\34\7\"\2\2\34&\b\3\1\2\35!\5\b\5\2\36\"\5\6\4\2\37\"\5\n"+
+		"\6\2 \"\5\b\5\2!\36\3\2\2\2!\37\3\2\2\2! \3\2\2\2\"#\3\2\2\2#$\b\3\1\2"+
+		"$&\3\2\2\2%\21\3\2\2\2%\24\3\2\2\2%\27\3\2\2\2%\30\3\2\2\2%\31\3\2\2\2"+
+		"%\33\3\2\2\2%\35\3\2\2\2&\5\3\2\2\2\'(\b\4\1\2()\7\16\2\2)*\5\6\4\21*"+
+		"+\b\4\1\2+S\3\2\2\2,-\7\3\2\2-.\5\6\4\2./\7\4\2\2/\60\b\4\1\2\60S\3\2"+
+		"\2\2\61\62\7\37\2\2\62S\b\4\1\2\63\64\7\36\2\2\64S\b\4\1\2\65\66\7\22"+
+		"\2\2\66\67\5\6\4\n\678\b\4\1\28S\3\2\2\29:\7\25\2\2:;\5\6\4\2;<\7\4\2"+
+		"\2<=\b\4\1\2=S\3\2\2\2>?\7\26\2\2?@\5\6\4\2@A\7\4\2\2AB\b\4\1\2BS\3\2"+
+		"\2\2CD\7\27\2\2DE\5\6\4\2EF\7\4\2\2FG\b\4\1\2GS\3\2\2\2HI\7\30\2\2IJ\5"+
+		"\6\4\2JK\7\4\2\2KL\b\4\1\2LS\3\2\2\2MN\7\31\2\2NO\5\6\4\2OP\7\4\2\2PQ"+
+		"\b\4\1\2QS\3\2\2\2R\'\3\2\2\2R,\3\2\2\2R\61\3\2\2\2R\63\3\2\2\2R\65\3"+
+		"\2\2\2R9\3\2\2\2R>\3\2\2\2RC\3\2\2\2RH\3\2\2\2RM\3\2\2\2So\3\2\2\2TU\f"+
+		"\17\2\2UV\7\21\2\2VW\5\6\4\20WX\b\4\1\2Xn\3\2\2\2YZ\f\16\2\2Z[\t\2\2\2"+
+		"[\\\5\6\4\17\\]\b\4\1\2]n\3\2\2\2^_\f\r\2\2_`\t\3\2\2`a\5\6\4\16ab\b\4"+
+		"\1\2bn\3\2\2\2cd\f\t\2\2de\7\23\2\2ef\5\6\4\nfg\b\4\1\2gn\3\2\2\2hi\f"+
+		"\b\2\2ij\7\24\2\2jk\5\6\4\tkl\b\4\1\2ln\3\2\2\2mT\3\2\2\2mY\3\2\2\2m^"+
+		"\3\2\2\2mc\3\2\2\2mh\3\2\2\2nq\3\2\2\2om\3\2\2\2op\3\2\2\2p\7\3\2\2\2"+
+		"qo\3\2\2\2rs\7\36\2\2st\7\5\2\2t\177\b\5\1\2uv\7\5\2\2vw\7\36\2\2w\177"+
+		"\b\5\1\2xy\7\36\2\2yz\7\6\2\2z\177\b\5\1\2{|\7\6\2\2|}\7\36\2\2}\177\b"+
+		"\5\1\2~r\3\2\2\2~u\3\2\2\2~x\3\2\2\2~{\3\2\2\2\177\t\3\2\2\2\u0080\u0081"+
+		"\7\36\2\2\u0081\u0082\7\7\2\2\u0082\u0083\5\6\4\2\u0083\u0084\b\6\1\2"+
+		"\u0084\u00a3\3\2\2\2\u0085\u0086\7\36\2\2\u0086\u0087\7\b\2\2\u0087\u0088"+
+		"\5\6\4\2\u0088\u0089\b\6\1\2\u0089\u00a3\3\2\2\2\u008a\u008b\7\36\2\2"+
+		"\u008b\u008c\7\t\2\2\u008c\u008d\5\6\4\2\u008d\u008e\b\6\1\2\u008e\u00a3"+
+		"\3\2\2\2\u008f\u0090\7\36\2\2\u0090\u0091\7\n\2\2\u0091\u0092\5\6\4\2"+
+		"\u0092\u0093\b\6\1\2\u0093\u00a3\3\2\2\2\u0094\u0095\7\36\2\2\u0095\u0096"+
+		"\7\13\2\2\u0096\u0097\5\6\4\2\u0097\u0098\b\6\1\2\u0098\u00a3\3\2\2\2"+
+		"\u0099\u009a\7\36\2\2\u009a\u009b\7\f\2\2\u009b\u009c\5\6\4\2\u009c\u009d"+
+		"\b\6\1\2\u009d\u00a3\3\2\2\2\u009e\u009f\7\36\2\2\u009f\u00a0\7\7\2\2"+
+		"\u00a0\u00a1\7\32\2\2\u00a1\u00a3\b\6\1\2\u00a2\u0080\3\2\2\2\u00a2\u0085"+
+		"\3\2\2\2\u00a2\u008a\3\2\2\2\u00a2\u008f\3\2\2\2\u00a2\u0094\3\2\2\2\u00a2"+
+		"\u0099\3\2\2\2\u00a2\u009e\3\2\2\2\u00a3\13\3\2\2\2\n\17!%Rmo~\u00a2";
+>>>>>>> 3777583922190ec05cb27c99fac2e052aad39483
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
