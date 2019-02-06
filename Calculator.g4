@@ -19,6 +19,8 @@ line:
     | equation  
     | COMMENT { System.out.println($COMMENT.text);} 
     | NEWLINE
+    | shorthand (expr | equation | shorthand)x
+    // | { System.out.println("Parsing Error"); }
     ;
 
 expr returns [Double val]: 
