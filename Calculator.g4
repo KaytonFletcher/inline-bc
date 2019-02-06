@@ -20,12 +20,12 @@ line:
     | NEWLINE
     | ZERO_ERROR {System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}
     | NEGATIVE_SQRT {System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number");}
-    | shorthand (expr | equation | shorthand)x
-    // | { System.out.println("Parsing Error"); }
+    | shorthand (expr | equation | shorthand) { System.out.println("Parsing Error"); }
     ;
 
 expr returns [Double val]: 
-    '(' expr ')' 
+     MINUS expr { $val = $expr.val * -1; }
+    |'(' expr ')' {$val = $expr.val;}
     | el=expr op=POW er=expr { $val= Math.pow($el.val,$er.val);}
     | el=expr op=(MULT|DIV) er=expr 
     { if($op.text.equals("*")){$val=$el.val*$er.val;} else {$val=$el.val/$er.val;} }
@@ -87,7 +87,7 @@ COMMENT: '/*' .*? '*/' -> skip;
 INLINE_COMMENT: '#' ~[\r\n]* -> skip;
 ID: [_A-Za-z]+;
 //INT: [0-9]+ ;
-DOUBLE: [+-]?([0-9]*[.])?[0-9]+;
+DOUBLE: ([0-9]*[.])?[0-9]+;
 WS : [ \t]+ -> skip ;
 ZERO_ERROR: [0-9]+'/''0';
 NEGATIVE_SQRT: SQRT'(''-'[0-9]+')';
