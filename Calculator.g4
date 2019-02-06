@@ -58,6 +58,7 @@ expr returns [Double val]:
     | LOG expr ')' { $val = Math.log($expr.val); } 
     | EXP expr ')' { $val = Math.exp($expr.val); }
 
+    | READ { $val = scnr.nextDouble(); }
     ;
 
 shorthand returns [Double val]:
