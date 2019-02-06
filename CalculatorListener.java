@@ -61,4 +61,14 @@ public interface CalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEquation(CalculatorParser.EquationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrint(CalculatorParser.PrintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrint(CalculatorParser.PrintContext ctx);
 }

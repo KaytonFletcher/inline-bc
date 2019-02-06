@@ -22,6 +22,7 @@ line:
     | NEWLINE
     //| ZERO_ERROR {System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}
     //| NEGATIVE_SQRT {System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number");}
+    | PRINT print { System.out.println(); }
     | shorthand (expr | equation | shorthand) { System.out.println("Parsing Error"); }
     ;
 
@@ -57,6 +58,7 @@ expr returns [Double val]:
     | COS expr ')' { $val = Math.cos($expr.val); }
     | LOG expr ')' { $val = Math.log($expr.val); } 
     | EXP expr ')' { $val = Math.exp($expr.val); }
+    
 
     ;
 
@@ -77,7 +79,12 @@ equation returns [Double val]:
     | ID '=' READ  { double toAdd = scnr.nextDouble(); hmap.put($ID.text, toAdd); }
 ;
 
+print:
+    '"'ID'"' {System.out.print($ID.text); } (',' print)? 
+    | expr {System.out.print($expr.val); } (',' print)? 
+;
 
+PRINT: 'print';
 PLUS: '+';
 MINUS: '-';
 MULT: '*';
@@ -92,6 +99,7 @@ COS: 'c(';
 LOG: 'l(';
 EXP: 'e(';
 READ: 'read()';
+
 
 NEWLINE:'\r'? '\n' ;
 COMMENT: '/*' .*? '*/' -> skip;
