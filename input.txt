@@ -1,8 +1,2 @@
-c=5
-c
-l=3
-l
-e=2
-e
-sqrt=6
-sqrt
+x=0
+5/x

@@ -14,12 +14,12 @@ program: line+ ;
 // { System.out.println("Value: "+ $expr.val); hmap.put($ID.text, $expr.val); }
 
 line: 
-    expr { System.out.println("result: "+ Double.toString($expr.val)); } 
+    expr { if(!Double.isNaN($expr.val)){System.out.println("result: "+ Double.toString($expr.val));} } 
     | shorthand { System.out.println("result: "+ Double.toString($shorthand.val)); } 
     | equation  
     | NEWLINE
-    | ZERO_ERROR {System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}
-    | NEGATIVE_SQRT {System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number");}
+    //| ZERO_ERROR {System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}
+    //| NEGATIVE_SQRT {System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number");}
     | shorthand (expr | equation | shorthand) { System.out.println("Parsing Error"); }
     ;
 
@@ -28,7 +28,9 @@ expr returns [Double val]:
     |'(' expr ')' {$val = $expr.val;}
     | el=expr op=POW er=expr { $val= Math.pow($el.val,$er.val);}
     | el=expr op=(MULT|DIV) er=expr 
-    { if($op.text.equals("*")){$val=$el.val*$er.val;} else {$val=$el.val/$er.val;} }
+    { if($op.text.equals("*")){$val=$el.val*$er.val;} 
+        else { if($er.val != 0.0){$val=$el.val/$er.val;}
+                else{$val=Double.NaN; System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}} }
 
     | el=expr op=(PLUS|MINUS) er=expr
     { if($op.text.equals("+")){$val=$el.val+$er.val;} else {$val=$el.val-$er.val;} }
@@ -44,7 +46,10 @@ expr returns [Double val]:
     | el=expr op=OR er=expr
     { if($el.val != 0.0 || $er.val != 0.0){$val = 1.0;} else{$val = 0.0;} }
 
-    | SQRT expr ')' { $val = Math.sqrt($expr.val); }
+    | SQRT expr ')' 
+    { if($expr.val < 0){$val = Double.NaN; 
+        System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number"); }
+        else{$val = Math.sqrt($expr.val);} }
 
     | SIN expr ')' { $val = Math.sin($expr.val); }
     | COS expr ')' { $val = Math.cos($expr.val); }
@@ -67,6 +72,7 @@ equation returns [Double val]:
     | ID '/=' expr { hmap.put($ID.text, hmap.getOrDefault($ID.text,0.0) / $expr.val); }
     | ID '^=' expr { hmap.put($ID.text, Math.pow(hmap.getOrDefault($ID.text,0.0), $expr.val)); }
 ;
+
 
 PLUS: '+';
 MINUS: '-';
