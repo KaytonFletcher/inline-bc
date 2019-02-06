@@ -1,8 +1,5 @@
-c=5
-c
-l=3
-l
-e=2
-e
-sqrt=6
-sqrt
+3+8
+x=read()
+1+1
+x
+5+7
