@@ -44,12 +44,12 @@ expr returns [Double val]:
     | el=expr op=OR er=expr
     { if($el.val != 0.0 || $er.val != 0.0){$val = 1.0;} else{$val = 0.0;} }
 
-    | SQRT '(' expr ')' { $val = Math.sqrt($expr.val); }
+    | SQRT expr ')' { $val = Math.sqrt($expr.val); }
 
-    | SIN '(' expr ')' { $val = Math.sin($expr.val); }
-    | COS '(' expr ')' { $val = Math.cos($expr.val); }
-    | LOG '(' expr ')' { $val = Math.log($expr.val); } 
-    | EXP '(' expr ')' { $val = Math.exp($expr.val); }
+    | SIN expr ')' { $val = Math.sin($expr.val); }
+    | COS expr ')' { $val = Math.cos($expr.val); }
+    | LOG expr ')' { $val = Math.log($expr.val); } 
+    | EXP expr ')' { $val = Math.exp($expr.val); }
     ;
 
 shorthand returns [Double val]:
@@ -76,11 +76,11 @@ POW: '^';
 NOT: '!';
 AND: '&&';
 OR: '||';
-SQRT: 'sqrt';
-SIN: 's';
-COS: 'c';
-LOG: 'l';
-EXP: 'e';
+SQRT: 'sqrt(';
+SIN: 's(';
+COS: 'c(';
+LOG: 'l(';
+EXP: 'e(';
 
 NEWLINE:'\r'? '\n' ;
 COMMENT: '/*' .*? '*/' -> skip;
