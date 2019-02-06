@@ -17,8 +17,9 @@ line:
     expr { System.out.println("result: "+ Double.toString($expr.val)); } 
     | shorthand { System.out.println("result: "+ Double.toString($shorthand.val)); } 
     | equation  
-    | COMMENT { System.out.println($COMMENT.text);} 
     | NEWLINE
+    | ZERO_ERROR {System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}
+    | NEGATIVE_SQRT {System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number");}
     | shorthand (expr | equation | shorthand)x
     // | { System.out.println("Parsing Error"); }
     ;
@@ -34,6 +35,21 @@ expr returns [Double val]:
 
     | DOUBLE { $val=Double.parseDouble($DOUBLE.text); }
     | ID { $val=hmap.getOrDefault($ID.text, 0.0);}
+
+    | NOT expr { if($expr.val == 0.0){$val = 1.0;} else {$val = 0.0;} }
+
+    | el=expr op=AND er=expr
+    { if($el.val != 0.0 && $er.val != 0.0){$val = 1.0;} else{$val = 0.0;} } 
+
+    | el=expr op=OR er=expr
+    { if($el.val != 0.0 || $er.val != 0.0){$val = 1.0;} else{$val = 0.0;} }
+
+    | SQRT '(' expr ')' { $val = Math.sqrt($expr.val); }
+
+    | SIN '(' expr ')' { $val = Math.sin($expr.val); }
+    | COS '(' expr ')' { $val = Math.cos($expr.val); }
+    | LOG '(' expr ')' { $val = Math.log($expr.val); } 
+    | EXP '(' expr ')' { $val = Math.exp($expr.val); }
     ;
 
 shorthand returns [Double val]:
@@ -57,10 +73,21 @@ MINUS: '-';
 MULT: '*';
 DIV: '/';
 POW: '^';
+NOT: '!';
+AND: '&&';
+OR: '||';
+SQRT: 'sqrt';
+SIN: 's';
+COS: 'c';
+LOG: 'l';
+EXP: 'e';
 
 NEWLINE:'\r'? '\n' ;
-COMMENT: '/*' .*? '*/';
+COMMENT: '/*' .*? '*/' -> skip;
+INLINE_COMMENT: '#' ~[\r\n]* -> skip;
 ID: [_A-Za-z]+;
 //INT: [0-9]+ ;
 DOUBLE: [+-]?([0-9]*[.])?[0-9]+;
 WS : [ \t]+ -> skip ;
+ZERO_ERROR: [0-9]+'/''0';
+NEGATIVE_SQRT: SQRT'(''-'[0-9]+')';
