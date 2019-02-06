@@ -11,7 +11,7 @@ grammar Calculator;
     Scanner scnr = new Scanner(System.in);
 }
 
-program: line+ ;
+program: line ( ';' '\n' line)* ';'? ;
 
 // { System.out.println("Value: "+ $expr.val); hmap.put($ID.text, $expr.val); }
 
