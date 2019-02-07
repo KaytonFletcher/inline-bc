@@ -25,7 +25,7 @@ public class CalculatorParser extends Parser {
 		T__9=10, T__10=11, T__11=12, T__12=13, PRINT=14, PLUS=15, MINUS=16, MULT=17, 
 		DIV=18, POW=19, NOT=20, AND=21, OR=22, SQRT=23, SIN=24, COS=25, LOG=26, 
 		EXP=27, READ=28, NEWLINE=29, COMMENT=30, INLINE_COMMENT=31, ID=32, DOUBLE=33, 
-		WS=34, ZERO_ERROR=35, NEGATIVE_SQRT=36;
+		WS=34, NEGATIVE_SQRT=35;
 	public static final int
 		RULE_program = 0, RULE_line = 1, RULE_expr = 2, RULE_shorthand = 3, RULE_equation = 4, 
 		RULE_print = 5;
@@ -50,7 +50,7 @@ public class CalculatorParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, "PRINT", "PLUS", "MINUS", "MULT", "DIV", "POW", "NOT", "AND", 
 			"OR", "SQRT", "SIN", "COS", "LOG", "EXP", "READ", "NEWLINE", "COMMENT", 
-			"INLINE_COMMENT", "ID", "DOUBLE", "WS", "ZERO_ERROR", "NEGATIVE_SQRT"
+			"INLINE_COMMENT", "ID", "DOUBLE", "WS", "NEGATIVE_SQRT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -395,7 +395,7 @@ public class CalculatorParser extends Parser {
 				setState(56);
 				match(T__2);
 				 if(((ExprContext)_localctx).expr.val < 0){((ExprContext)_localctx).val =  Double.NaN; 
-				        System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number"); }
+				        System.out.println("Runtime error: Square root of a negative number"); }
 				        else{((ExprContext)_localctx).val =  Math.sqrt(((ExprContext)_localctx).expr.val);} 
 				}
 				break;
@@ -502,8 +502,9 @@ public class CalculatorParser extends Parser {
 						setState(90);
 						((ExprContext)_localctx).er = ((ExprContext)_localctx).expr = expr(14);
 						 if((((ExprContext)_localctx).op!=null?((ExprContext)_localctx).op.getText():null).equals("*")){((ExprContext)_localctx).val = ((ExprContext)_localctx).el.val*((ExprContext)_localctx).er.val;} 
-						                  else { if(((ExprContext)_localctx).er.val != 0.0){((ExprContext)_localctx).val = ((ExprContext)_localctx).el.val/((ExprContext)_localctx).er.val;}
-						                          else{((ExprContext)_localctx).val = Double.NaN; System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}} 
+						                  else { if(((ExprContext)_localctx).er.val != 0){((ExprContext)_localctx).val = ((ExprContext)_localctx).el.val/((ExprContext)_localctx).er.val;}
+						                          else{((ExprContext)_localctx).val = Double.NaN; System.out.println("Runtime error: Divide by zero");}
+						                      } 
 						}
 						break;
 					case 3:
@@ -951,7 +952,11 @@ public class CalculatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
+<<<<<<< HEAD
 		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u00c4\4\2\t\2\4"+
+=======
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%\u00b6\4\2\t\2\4"+
+>>>>>>> e4288d5f916bc181bbab7a73f51b55ca19ad3c5d
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\5\2\21\n\2\6\2\23\n\2\r"+
 		"\2\16\2\24\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3"+
 		"%\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
