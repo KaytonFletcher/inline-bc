@@ -69,13 +69,16 @@ shorthand returns [Double val]:
 ;
 
 equation returns [Double val]:
-    ID '=' expr { hmap.put($ID.text, $expr.val); }
+    ID '=' el=expr op=AND er=expr { hmap.put($ID.text, $el.val); if($el.val != 0.0 && $er.val != 0.0){System.out.println("result: 1.0");} else{System.out.println("result: 0.0");} }
+    | ID '=' el=expr op=OR er=expr { hmap.put($ID.text, $el.val); if($el.val != 0.0 || $er.val != 0.0){System.out.println("result: 1.0");} else{System.out.println("result: 0.0");}}
+    | ID '=' expr { hmap.put($ID.text, $expr.val); }
     | ID '+=' expr { hmap.put($ID.text, hmap.getOrDefault($ID.text,0.0) + $expr.val); }
     | ID '-=' expr { hmap.put($ID.text, hmap.getOrDefault($ID.text,0.0) - $expr.val); }
     | ID '*=' expr { hmap.put($ID.text, hmap.getOrDefault($ID.text,0.0) * $expr.val); }
     | ID '/=' expr { hmap.put($ID.text, hmap.getOrDefault($ID.text,0.0) / $expr.val); }
     | ID '^=' expr { hmap.put($ID.text, Math.pow(hmap.getOrDefault($ID.text,0.0), $expr.val)); }
     | ID '=' READ  { double toAdd = scnr.nextDouble(); hmap.put($ID.text, toAdd); }
+    //| ID '=' el=expr op=AND er=expr { System.out.println("hi"); }
 ;
 
 print:

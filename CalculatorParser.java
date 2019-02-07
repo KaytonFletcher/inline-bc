@@ -662,11 +662,19 @@ public class CalculatorParser extends Parser {
 	public static class EquationContext extends ParserRuleContext {
 		public Double val;
 		public Token ID;
+		public ExprContext el;
+		public Token op;
+		public ExprContext er;
 		public ExprContext expr;
 		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
 		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode AND() { return getToken(CalculatorParser.AND, 0); }
+		public TerminalNode OR() { return getToken(CalculatorParser.OR, 0); }
 		public TerminalNode READ() { return getToken(CalculatorParser.READ, 0); }
 		public EquationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -686,7 +694,7 @@ public class CalculatorParser extends Parser {
 		EquationContext _localctx = new EquationContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_equation);
 		try {
-			setState(161);
+			setState(175);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
@@ -697,78 +705,110 @@ public class CalculatorParser extends Parser {
 				setState(128);
 				match(T__5);
 				setState(129);
-				((EquationContext)_localctx).expr = expr(0);
-				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), ((EquationContext)_localctx).expr.val); 
+				((EquationContext)_localctx).el = expr(0);
+				setState(130);
+				((EquationContext)_localctx).op = match(AND);
+				setState(131);
+				((EquationContext)_localctx).er = expr(0);
+				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), ((EquationContext)_localctx).el.val); if(((EquationContext)_localctx).el.val != 0.0 && ((EquationContext)_localctx).er.val != 0.0){System.out.println("result: 1.0");} else{System.out.println("result: 0.0");} 
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(132);
-				((EquationContext)_localctx).ID = match(ID);
-				setState(133);
-				match(T__6);
 				setState(134);
-				((EquationContext)_localctx).expr = expr(0);
-				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0) + ((EquationContext)_localctx).expr.val); 
+				((EquationContext)_localctx).ID = match(ID);
+				setState(135);
+				match(T__5);
+				setState(136);
+				((EquationContext)_localctx).el = expr(0);
+				setState(137);
+				((EquationContext)_localctx).op = match(OR);
+				setState(138);
+				((EquationContext)_localctx).er = expr(0);
+				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), ((EquationContext)_localctx).el.val); if(((EquationContext)_localctx).el.val != 0.0 || ((EquationContext)_localctx).er.val != 0.0){System.out.println("result: 1.0");} else{System.out.println("result: 0.0");}
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(137);
+				setState(141);
 				((EquationContext)_localctx).ID = match(ID);
-				setState(138);
-				match(T__7);
-				setState(139);
+				setState(142);
+				match(T__5);
+				setState(143);
 				((EquationContext)_localctx).expr = expr(0);
-				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0) - ((EquationContext)_localctx).expr.val); 
+				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), ((EquationContext)_localctx).expr.val); 
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(142);
+				setState(146);
 				((EquationContext)_localctx).ID = match(ID);
-				setState(143);
-				match(T__8);
-				setState(144);
+				setState(147);
+				match(T__6);
+				setState(148);
 				((EquationContext)_localctx).expr = expr(0);
-				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0) * ((EquationContext)_localctx).expr.val); 
+				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0) + ((EquationContext)_localctx).expr.val); 
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(147);
+				setState(151);
 				((EquationContext)_localctx).ID = match(ID);
-				setState(148);
-				match(T__9);
-				setState(149);
+				setState(152);
+				match(T__7);
+				setState(153);
 				((EquationContext)_localctx).expr = expr(0);
-				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0) / ((EquationContext)_localctx).expr.val); 
+				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0) - ((EquationContext)_localctx).expr.val); 
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(152);
+				setState(156);
 				((EquationContext)_localctx).ID = match(ID);
-				setState(153);
-				match(T__10);
-				setState(154);
+				setState(157);
+				match(T__8);
+				setState(158);
 				((EquationContext)_localctx).expr = expr(0);
-				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), Math.pow(hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0), ((EquationContext)_localctx).expr.val)); 
+				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0) * ((EquationContext)_localctx).expr.val); 
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(157);
+				setState(161);
 				((EquationContext)_localctx).ID = match(ID);
-				setState(158);
+				setState(162);
+				match(T__9);
+				setState(163);
+				((EquationContext)_localctx).expr = expr(0);
+				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0) / ((EquationContext)_localctx).expr.val); 
+				}
+				break;
+			case 8:
+				enterOuterAlt(_localctx, 8);
+				{
+				setState(166);
+				((EquationContext)_localctx).ID = match(ID);
+				setState(167);
+				match(T__10);
+				setState(168);
+				((EquationContext)_localctx).expr = expr(0);
+				 hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), Math.pow(hmap.getOrDefault((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null),0.0), ((EquationContext)_localctx).expr.val)); 
+				}
+				break;
+			case 9:
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(171);
+				((EquationContext)_localctx).ID = match(ID);
+				setState(172);
 				match(T__5);
-				setState(159);
+				setState(173);
 				match(READ);
 				 double toAdd = scnr.nextDouble(); hmap.put((((EquationContext)_localctx).ID!=null?((EquationContext)_localctx).ID.getText():null), toAdd); 
 				}
@@ -815,27 +855,27 @@ public class CalculatorParser extends Parser {
 		enterRule(_localctx, 10, RULE_print);
 		int _la;
 		try {
-			setState(177);
+			setState(191);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__11:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(163);
+				setState(177);
 				match(T__11);
-				setState(164);
+				setState(178);
 				((PrintContext)_localctx).ID = match(ID);
-				setState(165);
+				setState(179);
 				match(T__11);
 				System.out.print((((PrintContext)_localctx).ID!=null?((PrintContext)_localctx).ID.getText():null)); 
-				setState(169);
+				setState(183);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T__12) {
 					{
-					setState(167);
+					setState(181);
 					match(T__12);
-					setState(168);
+					setState(182);
 					print();
 					}
 				}
@@ -855,17 +895,17 @@ public class CalculatorParser extends Parser {
 			case DOUBLE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(171);
+				setState(185);
 				((PrintContext)_localctx).expr = expr(0);
 				System.out.print(((PrintContext)_localctx).expr.val); 
-				setState(175);
+				setState(189);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T__12) {
 					{
-					setState(173);
+					setState(187);
 					match(T__12);
-					setState(174);
+					setState(188);
 					print();
 					}
 				}
@@ -911,7 +951,7 @@ public class CalculatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u00b6\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u00c4\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\5\2\21\n\2\6\2\23\n\2\r"+
 		"\2\16\2\24\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3"+
 		"%\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
@@ -921,51 +961,56 @@ public class CalculatorParser extends Parser {
 		"\3\4\3\4\3\4\3\4\7\4o\n\4\f\4\16\4r\13\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
 		"\5\3\5\3\5\3\5\3\5\5\5\u0080\n\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
 		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u00a4\n\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7"+
-		"\u00ac\n\7\3\7\3\7\3\7\3\7\5\7\u00b2\n\7\5\7\u00b4\n\7\3\7\2\3\6\b\2\4"+
-		"\6\b\n\f\2\4\3\2\23\24\3\2\21\22\2\u00d2\2\22\3\2\2\2\4$\3\2\2\2\6S\3"+
-		"\2\2\2\b\177\3\2\2\2\n\u00a3\3\2\2\2\f\u00b3\3\2\2\2\16\20\5\4\3\2\17"+
-		"\21\7\3\2\2\20\17\3\2\2\2\20\21\3\2\2\2\21\23\3\2\2\2\22\16\3\2\2\2\23"+
-		"\24\3\2\2\2\24\22\3\2\2\2\24\25\3\2\2\2\25\3\3\2\2\2\26\27\5\6\4\2\27"+
-		"\30\b\3\1\2\30%\3\2\2\2\31\32\5\b\5\2\32\33\b\3\1\2\33%\3\2\2\2\34%\5"+
-		"\n\6\2\35\36\7\20\2\2\36\37\5\f\7\2\37 \b\3\1\2 %\3\2\2\2!%\7 \2\2\"%"+
-		"\7!\2\2#%\7\37\2\2$\26\3\2\2\2$\31\3\2\2\2$\34\3\2\2\2$\35\3\2\2\2$!\3"+
-		"\2\2\2$\"\3\2\2\2$#\3\2\2\2%\5\3\2\2\2&\'\b\4\1\2\'(\7\22\2\2()\5\6\4"+
-		"\22)*\b\4\1\2*T\3\2\2\2+,\7\4\2\2,-\5\6\4\2-.\7\5\2\2./\b\4\1\2/T\3\2"+
-		"\2\2\60\61\7#\2\2\61T\b\4\1\2\62\63\7\"\2\2\63T\b\4\1\2\64\65\7\26\2\2"+
-		"\65\66\5\6\4\13\66\67\b\4\1\2\67T\3\2\2\289\7\31\2\29:\5\6\4\2:;\7\5\2"+
-		"\2;<\b\4\1\2<T\3\2\2\2=>\7\32\2\2>?\5\6\4\2?@\7\5\2\2@A\b\4\1\2AT\3\2"+
-		"\2\2BC\7\33\2\2CD\5\6\4\2DE\7\5\2\2EF\b\4\1\2FT\3\2\2\2GH\7\34\2\2HI\5"+
-		"\6\4\2IJ\7\5\2\2JK\b\4\1\2KT\3\2\2\2LM\7\35\2\2MN\5\6\4\2NO\7\5\2\2OP"+
-		"\b\4\1\2PT\3\2\2\2QR\7\36\2\2RT\b\4\1\2S&\3\2\2\2S+\3\2\2\2S\60\3\2\2"+
-		"\2S\62\3\2\2\2S\64\3\2\2\2S8\3\2\2\2S=\3\2\2\2SB\3\2\2\2SG\3\2\2\2SL\3"+
-		"\2\2\2SQ\3\2\2\2Tp\3\2\2\2UV\f\20\2\2VW\7\25\2\2WX\5\6\4\21XY\b\4\1\2"+
-		"Yo\3\2\2\2Z[\f\17\2\2[\\\t\2\2\2\\]\5\6\4\20]^\b\4\1\2^o\3\2\2\2_`\f\16"+
-		"\2\2`a\t\3\2\2ab\5\6\4\17bc\b\4\1\2co\3\2\2\2de\f\n\2\2ef\7\27\2\2fg\5"+
-		"\6\4\13gh\b\4\1\2ho\3\2\2\2ij\f\t\2\2jk\7\30\2\2kl\5\6\4\nlm\b\4\1\2m"+
-		"o\3\2\2\2nU\3\2\2\2nZ\3\2\2\2n_\3\2\2\2nd\3\2\2\2ni\3\2\2\2or\3\2\2\2"+
-		"pn\3\2\2\2pq\3\2\2\2q\7\3\2\2\2rp\3\2\2\2st\7\"\2\2tu\7\6\2\2u\u0080\b"+
-		"\5\1\2vw\7\6\2\2wx\7\"\2\2x\u0080\b\5\1\2yz\7\"\2\2z{\7\7\2\2{\u0080\b"+
-		"\5\1\2|}\7\7\2\2}~\7\"\2\2~\u0080\b\5\1\2\177s\3\2\2\2\177v\3\2\2\2\177"+
-		"y\3\2\2\2\177|\3\2\2\2\u0080\t\3\2\2\2\u0081\u0082\7\"\2\2\u0082\u0083"+
-		"\7\b\2\2\u0083\u0084\5\6\4\2\u0084\u0085\b\6\1\2\u0085\u00a4\3\2\2\2\u0086"+
-		"\u0087\7\"\2\2\u0087\u0088\7\t\2\2\u0088\u0089\5\6\4\2\u0089\u008a\b\6"+
-		"\1\2\u008a\u00a4\3\2\2\2\u008b\u008c\7\"\2\2\u008c\u008d\7\n\2\2\u008d"+
-		"\u008e\5\6\4\2\u008e\u008f\b\6\1\2\u008f\u00a4\3\2\2\2\u0090\u0091\7\""+
-		"\2\2\u0091\u0092\7\13\2\2\u0092\u0093\5\6\4\2\u0093\u0094\b\6\1\2\u0094"+
-		"\u00a4\3\2\2\2\u0095\u0096\7\"\2\2\u0096\u0097\7\f\2\2\u0097\u0098\5\6"+
-		"\4\2\u0098\u0099\b\6\1\2\u0099\u00a4\3\2\2\2\u009a\u009b\7\"\2\2\u009b"+
-		"\u009c\7\r\2\2\u009c\u009d\5\6\4\2\u009d\u009e\b\6\1\2\u009e\u00a4\3\2"+
-		"\2\2\u009f\u00a0\7\"\2\2\u00a0\u00a1\7\b\2\2\u00a1\u00a2\7\36\2\2\u00a2"+
-		"\u00a4\b\6\1\2\u00a3\u0081\3\2\2\2\u00a3\u0086\3\2\2\2\u00a3\u008b\3\2"+
-		"\2\2\u00a3\u0090\3\2\2\2\u00a3\u0095\3\2\2\2\u00a3\u009a\3\2\2\2\u00a3"+
-		"\u009f\3\2\2\2\u00a4\13\3\2\2\2\u00a5\u00a6\7\16\2\2\u00a6\u00a7\7\"\2"+
-		"\2\u00a7\u00a8\7\16\2\2\u00a8\u00ab\b\7\1\2\u00a9\u00aa\7\17\2\2\u00aa"+
-		"\u00ac\5\f\7\2\u00ab\u00a9\3\2\2\2\u00ab\u00ac\3\2\2\2\u00ac\u00b4\3\2"+
-		"\2\2\u00ad\u00ae\5\6\4\2\u00ae\u00b1\b\7\1\2\u00af\u00b0\7\17\2\2\u00b0"+
-		"\u00b2\5\f\7\2\u00b1\u00af\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b4\3\2"+
-		"\2\2\u00b3\u00a5\3\2\2\2\u00b3\u00ad\3\2\2\2\u00b4\r\3\2\2\2\r\20\24$"+
-		"Snp\177\u00a3\u00ab\u00b1\u00b3";
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
+		"\6\3\6\3\6\3\6\5\6\u00b2\n\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7\u00ba\n\7\3\7"+
+		"\3\7\3\7\3\7\5\7\u00c0\n\7\5\7\u00c2\n\7\3\7\2\3\6\b\2\4\6\b\n\f\2\4\3"+
+		"\2\23\24\3\2\21\22\2\u00e2\2\22\3\2\2\2\4$\3\2\2\2\6S\3\2\2\2\b\177\3"+
+		"\2\2\2\n\u00b1\3\2\2\2\f\u00c1\3\2\2\2\16\20\5\4\3\2\17\21\7\3\2\2\20"+
+		"\17\3\2\2\2\20\21\3\2\2\2\21\23\3\2\2\2\22\16\3\2\2\2\23\24\3\2\2\2\24"+
+		"\22\3\2\2\2\24\25\3\2\2\2\25\3\3\2\2\2\26\27\5\6\4\2\27\30\b\3\1\2\30"+
+		"%\3\2\2\2\31\32\5\b\5\2\32\33\b\3\1\2\33%\3\2\2\2\34%\5\n\6\2\35\36\7"+
+		"\20\2\2\36\37\5\f\7\2\37 \b\3\1\2 %\3\2\2\2!%\7 \2\2\"%\7!\2\2#%\7\37"+
+		"\2\2$\26\3\2\2\2$\31\3\2\2\2$\34\3\2\2\2$\35\3\2\2\2$!\3\2\2\2$\"\3\2"+
+		"\2\2$#\3\2\2\2%\5\3\2\2\2&\'\b\4\1\2\'(\7\22\2\2()\5\6\4\22)*\b\4\1\2"+
+		"*T\3\2\2\2+,\7\4\2\2,-\5\6\4\2-.\7\5\2\2./\b\4\1\2/T\3\2\2\2\60\61\7#"+
+		"\2\2\61T\b\4\1\2\62\63\7\"\2\2\63T\b\4\1\2\64\65\7\26\2\2\65\66\5\6\4"+
+		"\13\66\67\b\4\1\2\67T\3\2\2\289\7\31\2\29:\5\6\4\2:;\7\5\2\2;<\b\4\1\2"+
+		"<T\3\2\2\2=>\7\32\2\2>?\5\6\4\2?@\7\5\2\2@A\b\4\1\2AT\3\2\2\2BC\7\33\2"+
+		"\2CD\5\6\4\2DE\7\5\2\2EF\b\4\1\2FT\3\2\2\2GH\7\34\2\2HI\5\6\4\2IJ\7\5"+
+		"\2\2JK\b\4\1\2KT\3\2\2\2LM\7\35\2\2MN\5\6\4\2NO\7\5\2\2OP\b\4\1\2PT\3"+
+		"\2\2\2QR\7\36\2\2RT\b\4\1\2S&\3\2\2\2S+\3\2\2\2S\60\3\2\2\2S\62\3\2\2"+
+		"\2S\64\3\2\2\2S8\3\2\2\2S=\3\2\2\2SB\3\2\2\2SG\3\2\2\2SL\3\2\2\2SQ\3\2"+
+		"\2\2Tp\3\2\2\2UV\f\20\2\2VW\7\25\2\2WX\5\6\4\21XY\b\4\1\2Yo\3\2\2\2Z["+
+		"\f\17\2\2[\\\t\2\2\2\\]\5\6\4\20]^\b\4\1\2^o\3\2\2\2_`\f\16\2\2`a\t\3"+
+		"\2\2ab\5\6\4\17bc\b\4\1\2co\3\2\2\2de\f\n\2\2ef\7\27\2\2fg\5\6\4\13gh"+
+		"\b\4\1\2ho\3\2\2\2ij\f\t\2\2jk\7\30\2\2kl\5\6\4\nlm\b\4\1\2mo\3\2\2\2"+
+		"nU\3\2\2\2nZ\3\2\2\2n_\3\2\2\2nd\3\2\2\2ni\3\2\2\2or\3\2\2\2pn\3\2\2\2"+
+		"pq\3\2\2\2q\7\3\2\2\2rp\3\2\2\2st\7\"\2\2tu\7\6\2\2u\u0080\b\5\1\2vw\7"+
+		"\6\2\2wx\7\"\2\2x\u0080\b\5\1\2yz\7\"\2\2z{\7\7\2\2{\u0080\b\5\1\2|}\7"+
+		"\7\2\2}~\7\"\2\2~\u0080\b\5\1\2\177s\3\2\2\2\177v\3\2\2\2\177y\3\2\2\2"+
+		"\177|\3\2\2\2\u0080\t\3\2\2\2\u0081\u0082\7\"\2\2\u0082\u0083\7\b\2\2"+
+		"\u0083\u0084\5\6\4\2\u0084\u0085\7\27\2\2\u0085\u0086\5\6\4\2\u0086\u0087"+
+		"\b\6\1\2\u0087\u00b2\3\2\2\2\u0088\u0089\7\"\2\2\u0089\u008a\7\b\2\2\u008a"+
+		"\u008b\5\6\4\2\u008b\u008c\7\30\2\2\u008c\u008d\5\6\4\2\u008d\u008e\b"+
+		"\6\1\2\u008e\u00b2\3\2\2\2\u008f\u0090\7\"\2\2\u0090\u0091\7\b\2\2\u0091"+
+		"\u0092\5\6\4\2\u0092\u0093\b\6\1\2\u0093\u00b2\3\2\2\2\u0094\u0095\7\""+
+		"\2\2\u0095\u0096\7\t\2\2\u0096\u0097\5\6\4\2\u0097\u0098\b\6\1\2\u0098"+
+		"\u00b2\3\2\2\2\u0099\u009a\7\"\2\2\u009a\u009b\7\n\2\2\u009b\u009c\5\6"+
+		"\4\2\u009c\u009d\b\6\1\2\u009d\u00b2\3\2\2\2\u009e\u009f\7\"\2\2\u009f"+
+		"\u00a0\7\13\2\2\u00a0\u00a1\5\6\4\2\u00a1\u00a2\b\6\1\2\u00a2\u00b2\3"+
+		"\2\2\2\u00a3\u00a4\7\"\2\2\u00a4\u00a5\7\f\2\2\u00a5\u00a6\5\6\4\2\u00a6"+
+		"\u00a7\b\6\1\2\u00a7\u00b2\3\2\2\2\u00a8\u00a9\7\"\2\2\u00a9\u00aa\7\r"+
+		"\2\2\u00aa\u00ab\5\6\4\2\u00ab\u00ac\b\6\1\2\u00ac\u00b2\3\2\2\2\u00ad"+
+		"\u00ae\7\"\2\2\u00ae\u00af\7\b\2\2\u00af\u00b0\7\36\2\2\u00b0\u00b2\b"+
+		"\6\1\2\u00b1\u0081\3\2\2\2\u00b1\u0088\3\2\2\2\u00b1\u008f\3\2\2\2\u00b1"+
+		"\u0094\3\2\2\2\u00b1\u0099\3\2\2\2\u00b1\u009e\3\2\2\2\u00b1\u00a3\3\2"+
+		"\2\2\u00b1\u00a8\3\2\2\2\u00b1\u00ad\3\2\2\2\u00b2\13\3\2\2\2\u00b3\u00b4"+
+		"\7\16\2\2\u00b4\u00b5\7\"\2\2\u00b5\u00b6\7\16\2\2\u00b6\u00b9\b\7\1\2"+
+		"\u00b7\u00b8\7\17\2\2\u00b8\u00ba\5\f\7\2\u00b9\u00b7\3\2\2\2\u00b9\u00ba"+
+		"\3\2\2\2\u00ba\u00c2\3\2\2\2\u00bb\u00bc\5\6\4\2\u00bc\u00bf\b\7\1\2\u00bd"+
+		"\u00be\7\17\2\2\u00be\u00c0\5\f\7\2\u00bf\u00bd\3\2\2\2\u00bf\u00c0\3"+
+		"\2\2\2\u00c0\u00c2\3\2\2\2\u00c1\u00b3\3\2\2\2\u00c1\u00bb\3\2\2\2\u00c2"+
+		"\r\3\2\2\2\r\20\24$Snp\177\u00b1\u00b9\u00bf\u00c1";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
