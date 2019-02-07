@@ -30,9 +30,9 @@ expr returns [Double val]:
     | el=expr op=POW er=expr { $val= Math.pow($el.val,$er.val);}
     | el=expr op=(MULT|DIV) er=expr 
     { if($op.text.equals("*")){$val=$el.val*$er.val;} 
-        else { if($er.val != 0.0){$val=$el.val/$er.val;}
-                else{$val=Double.NaN; System.out.println("Runtime error (func=(main), adr=6): Divide by zero");}} }
-
+        else { if($er.val != 0){$val=$el.val/$er.val;}
+                else{$val=Double.NaN; System.out.println("Runtime error: Divide by zero");}
+            } }
     | el=expr op=(PLUS|MINUS) er=expr
     { if($op.text.equals("+")){$val=$el.val+$er.val;} else {$val=$el.val-$er.val;} }
 
@@ -49,7 +49,7 @@ expr returns [Double val]:
 
     | SQRT expr ')' 
     { if($expr.val < 0){$val = Double.NaN; 
-        System.out.println("Runtime error (func=(main), adr=6): Square root of a negative number"); }
+        System.out.println("Runtime error: Square root of a negative number"); }
         else{$val = Math.sqrt($expr.val);} }
 
     | SIN expr ')' { $val = Math.sin($expr.val); }
@@ -107,5 +107,4 @@ ID: [_A-Za-z]+;
 //INT: [0-9]+ ;
 DOUBLE: ([0-9]*[.])?[0-9]+;
 WS : [ \t]+ -> skip ;
-ZERO_ERROR: [0-9]+'/''0';
 NEGATIVE_SQRT: SQRT'(''-'[0-9]+')';
