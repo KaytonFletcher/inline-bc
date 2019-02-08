@@ -1,4 +1,4 @@
-# This file tests special expressions (read and sqrt)
+# This file tests special expressions (read, print and sqrt)
 
 #2
 sqrt(4)
@@ -30,3 +30,15 @@ read()
 #output will be equal to user input
 c=read()
 c
+
+#1234
+print 1,2,3,4
+
+#print the values of the x,y and z variables
+print x,y,z
+
+#hello56
+print "hello", 5, 6
+
+#prints the value the user inputs
+print read()
