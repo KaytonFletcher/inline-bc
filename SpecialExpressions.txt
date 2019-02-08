@@ -23,3 +23,10 @@ sqrt(x)
 y=81
 z=sqrt(y)
 z
+
+#output will be equal to user input (eg: if user inputs 3, output will be 3)
+read()
+
+#output will be equal to user input
+c=read()
+c
