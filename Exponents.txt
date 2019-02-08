@@ -1,0 +1,28 @@
+# This file tests exponents
+
+#8
+2^3
+
+#0.0625
+4^-2
+
+#1
+3^0
+
+#1 
+0^0
+
+#no output
+x=2
+
+#4
+x^2
+
+#2
+x
+
+#no output
+y=3
+
+#8
+x^y
