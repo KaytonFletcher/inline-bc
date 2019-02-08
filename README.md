@@ -25,10 +25,17 @@ like so (your version may vary) ->
 "configurations":
 
 "name": "antlr4-calculator",
+
 "type": "antlr-debug",
+
 "request": "launch",
+
 "input": "SOMETHING.txt",
+
 "grammar": "Calculator.g4",
+
 "startRule": "program",
+
 "printParseTree": true,
+
 "visualParseTree": true
