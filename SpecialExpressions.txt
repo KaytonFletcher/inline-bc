@@ -1,0 +1,25 @@
+# This file tests special expressions (read and sqrt)
+
+#2
+sqrt(4)
+
+#1.414...
+sqrt(2)
+
+#2
+sqrt(sqrt(16))
+
+#prints a runtime error
+sqrt(-16)
+
+#2.236...
+sqrt(5)
+
+#8
+x= 64
+sqrt(x)
+
+#9
+y=81
+z=sqrt(y)
+z
