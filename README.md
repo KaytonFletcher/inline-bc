@@ -20,11 +20,8 @@ It will halt the program until input is provided.
 
 If you wish to use the VScode parse tree extension, make sure you configure the launch.json
 like so (your version may vary) -> 
-
-{
     "version": "2.0.0",
-    "configurations": [
-      {
+    "configurations":
         "name": "antlr4-calculator",
         "type": "antlr-debug",
         "request": "launch",
@@ -33,6 +30,3 @@ like so (your version may vary) ->
         "startRule": "program",
         "printParseTree": true,
         "visualParseTree": true
-     }
-     ]
-  }
