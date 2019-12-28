@@ -1,0 +1,43 @@
+# This file tests shorthand operators
+
+#no output
+x=6
+
+#6
+x++
+
+#7
+x
+
+#no output
+y=3
+
+#4
+++y
+
+#no output
+y+=2
+
+#6
+y
+
+#no output
+x-=3
+
+#4
+x
+
+#no output
+q=3
+
+#no output
+q*=2
+
+#6
+q
+
+#no output
+q/=4
+
+#1.5
+q

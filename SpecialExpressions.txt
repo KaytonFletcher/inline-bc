@@ -1,0 +1,44 @@
+# This file tests special expressions (read, print and sqrt)
+
+#2
+sqrt(4)
+
+#1.414...
+sqrt(2)
+
+#2
+sqrt(sqrt(16))
+
+#prints a runtime error
+sqrt(-16)
+
+#2.236...
+sqrt(5)
+
+#8
+x= 64
+sqrt(x)
+
+#9
+y=81
+z=sqrt(y)
+z
+
+#output will be equal to user input (eg: if user inputs 3, output will be 3)
+read()
+
+#output will be equal to user input
+c=read()
+c
+
+#1234
+print 1,2,3,4
+
+#print the values of the x,y and z variables
+print x,y,z
+
+#hello56
+print "hello", 5, 6
+
+#prints the value the user inputs
+print read()
